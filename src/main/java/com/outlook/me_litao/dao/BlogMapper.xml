@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.outlook.me_litao.dao.BlogMapper">
+
+    <insert id="addBlog" parameterType="blog">
+        insert into blog.blog_content(title, content, publisher_id, publish_time)
+        value ( #{blog.title} ,  #{blog.content} , #{blog.publisher.id} , NOW()  )
+    </insert>
+
+    <delete id="delBlog" parameterType="int">
+        delete from blog.blog_content where id= #{bid}
+    </delete>
+
+
+    <resultMap id="blogMap" type="blog">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="publishTime" column="publish_time"/>
+        <association javaType="user" property="publisher">
+            <result property="id" column="uid"/>
+            <result property="name" column="name"/>
+            <result property="avatar" column="avatar"/>
+        </association>
+    </resultMap>
+
+    <sql id="whereSelect">
+        <where>
+            <if test="bid != null">
+                b.id=bid
+            </if>
+            <if test="find != null">
+                and ( title like "%"#{find}"%" or content like "%"#{find}"%")
+            </if>
+            <if test="pid!=null">
+                and publisher_id = #{publisher_id}
+            </if>
+            <if test="pdate!=null">
+                and TO_DAYS(publish_time) = TO_DAYS(#{publish_time})
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectBlogs" parameterType="map" resultMap="blogMap">
+        select b.id id, title, content, publish_time, u.id uid , name , avatar from blog.blog_content b left join blog.user u on u.id = b.publisher_id
+        <include refid="whereSelect"></include>
+        <if test="bid == null">
+            limit ${offSet},${limit}
+        </if>
+    </select>
+
+
+    <select id="selectBlogsCount" resultType="int">
+        select count(b.id) from blog.blog_content b left join blog.user u on u.id = b.publisher_id
+        <include refid="whereSelect"></include>
+    </select>
+</mapper>
