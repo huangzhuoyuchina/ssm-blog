@@ -46,6 +46,7 @@
     <select id="selectBlogs" parameterType="map" resultMap="blogMap">
         select b.id id, title, content, publish_time, u.id uid , name , avatar from blog.blog_content b left join blog.user u on u.id = b.publisher_id
         <include refid="whereSelect"></include>
+        order by publish_time desc
         <if test="bid == null">
             limit ${offSet},${limit}
         </if>
