@@ -1,6 +1,8 @@
 package com.outlook.me_litao.service;
 
+import com.outlook.me_litao.bean.BlogDataPage;
 import com.outlook.me_litao.bean.DataPage;
+import com.outlook.me_litao.bean.UniversalDataPage;
 import com.outlook.me_litao.pojo.Blog;
 import com.outlook.me_litao.pojo.User;
 
@@ -51,7 +53,7 @@ public class TestBlogService {
         map.put("offSet" , 10);
         map.put("limit" , 10);
 
-        DataPage blogs = blogService.selectBlogs(map);
+        UniversalDataPage blogs = (UniversalDataPage)blogService.selectBlogs(map);
         blogs.getList().forEach(System.out::println);
         System.out.println( blogs.getPagenum() );
         System.out.println( blogs.getPagesnum() );
@@ -68,7 +70,7 @@ public class TestBlogService {
         map.put("offSet" , 0);
         map.put("limit" , 10);
 
-        DataPage blogs = blogService.selectBlogs(map);
+        UniversalDataPage blogs = (UniversalDataPage)blogService.selectBlogs(map);
         blogs.getList().forEach(System.out::println);
         System.out.println( blogs.getPagenum() );
         System.out.println( blogs.getPagesnum() );

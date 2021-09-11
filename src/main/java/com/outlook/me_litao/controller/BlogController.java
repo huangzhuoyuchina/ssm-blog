@@ -1,5 +1,6 @@
 package com.outlook.me_litao.controller;
 
+import com.outlook.me_litao.bean.BlogDataPage;
 import com.outlook.me_litao.bean.ResponseCode;
 import com.outlook.me_litao.bean.ApiResponse;
 import com.outlook.me_litao.bean.DataPage;
@@ -47,6 +48,7 @@ public class BlogController {
 //        System.out.println( publishTime);
         System.out.println(params);
 
+        blogService.setDataPageType(BlogDataPage.class);
         DataPage blogsPage = blogService.selectBlogs(params);
 //        DataPage blogsPage = blogService.selectBlogs(null);
 

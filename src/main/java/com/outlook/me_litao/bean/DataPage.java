@@ -10,66 +10,15 @@ import java.util.Map;
  * @author: Ximu-Tao
  * @create: 2021-09-07 17:57
  **/
-public class  DataPage <T> {
-    private int pagenum;
-    private int pagesnum;
-    private List<T> list;
-    private final Map<String,String> parameter = new HashMap<>();
+public interface DataPage <T> {
 
-    public String addParameter( String key , String value){
-        return parameter.put(key, value);
-    }
+     String addParameter( String key , String value);
 
-    public Map<String, String> getParameter() {
-        return parameter;
-    }
+     void setPagenum(int pagenum);
 
-    public int getPagenum() {
-        return pagenum;
-    }
+     void setPagesnum(int pagesnum);
 
-    public void setPagenum(int pagenum) {
-        this.pagenum = pagenum;
-    }
-
-    public int getPagesnum() {
-        return pagesnum;
-    }
-
-    public void setPagesnum(int pagesnum) {
-        this.pagesnum = pagesnum;
-    }
-
-    public List<T> getList() {
-        return list;
-    }
-
-    public void setList(List<T> list) {
-        this.list = list;
-    }
-
-
-
-    public int size() {
-        return 0;
-    }
-
-    public boolean isEmpty() {
-        return list.isEmpty();
-    }
-
-    public boolean add(T o) {
-        return list.add(o);
-    }
-
-    public boolean addAll(List<T> l) {
-        return list.addAll(l);
-    }
-
-
-    public void clear() {
-        list.clear();
-    }
+     void setList(List<T> list);
 
 
 }
