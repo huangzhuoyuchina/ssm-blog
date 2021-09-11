@@ -23,6 +23,9 @@ public class ApiResponse {
     public int getCode() {
         return code.code();
     }
+    public String getMsg() {
+        return code.toString();
+    }
 
     public void setCode(ResponseCode code) {
         this.code = code;
