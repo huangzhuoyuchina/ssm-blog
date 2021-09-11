@@ -49,10 +49,10 @@ public class BlogServiceImpl implements BlogService{
         }
 
         if ( !m.containsKey( "page") ){
-            m.put("page" , 1 );
+            m.put("page" , "1" );
         }
 
-        m.put("offSet" , 10 * ((int)m.get("page")-1 )  );
+        m.put("offSet" , 10 * ((Integer.parseInt((String) m.get("page")))-1 )  );
         m.put("limit" , 10 );
 
         int count  = blogMapper.selectBlogsCount( m );
@@ -75,7 +75,7 @@ public class BlogServiceImpl implements BlogService{
         }).collect(Collectors.toList());
 
         page.setList( blogs );
-        page.setPagenum((Integer) m.get("page"));
+        page.setPagenum( Integer.parseInt((String) m.get("page")) );
         page.setPagesnum( (count/10)+ ((count%10)==0?0:1) );
         page.addParameter( "publisher_id" , (String) m.get("publisher_id"));
 
