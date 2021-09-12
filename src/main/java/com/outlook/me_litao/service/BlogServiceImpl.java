@@ -67,18 +67,10 @@ public class BlogServiceImpl implements BlogService{
         DataPage page = dataPageFactory.createDataPage();
 
         List<Blog> blogs2 = blogMapper.selectBlogs(m);
-        List<Map<String,String>> blogs = blogs2.stream().map( blog -> {
-            HashMap<String, String> map = new HashMap<>();
-            map.put("id" , String.valueOf(blog.getId()));
-            map.put( "avatar" , blog.getPublisher().getAvatar() );
-            map.put( "name" ,  blog.getPublisher().getName()  );
-            map.put( "publish_time" ,  blog.getPublishTime().toString()  );
-            map.put( "publisher_id" , String.valueOf(blog.getPublisher().getId()));
-            map.put( "title" ,  blog.getTitle()  );
-            map.put( "content" ,  blog.getContent()  );
 
-            return map;
-        }).collect(Collectors.toList());
+        List<BlogPublicInfo> blogs = blogs2.stream()
+                .map(BlogPublicInfo::new)
+                .collect(Collectors.toList());
 
         page.setList( blogs );
         page.setPagenum( Integer.parseInt((String) m.get("page")) );
