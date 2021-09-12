@@ -21,7 +21,6 @@ public interface BlogMapper {
     /**
      * 根据 Map 内的条件查询博客
      * Map 内参数:
-     *       bid : int , 博客ID , 可选
      *       find : String , 使用此字符串在标题和内容中进行模糊查找 , 可选
      *       pid : int , 发布人ID , 可选
      *       pdate : date , 发布日期 , 可选

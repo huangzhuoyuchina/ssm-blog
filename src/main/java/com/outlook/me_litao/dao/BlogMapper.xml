@@ -28,17 +28,14 @@
 
     <sql id="whereSelect">
         <where>
-            <if test="bid != null">
-                b.id=bid
-            </if>
             <if test="find != null">
                 and ( title like "%"#{find}"%" or content like "%"#{find}"%")
             </if>
             <if test="pid!=null">
-                and publisher_id = #{publisher_id}
+                and publisher_id = #{pid}
             </if>
             <if test="pdate!=null">
-                and TO_DAYS(publish_time) = TO_DAYS(#{publish_time})
+                and TO_DAYS(publish_time) = TO_DAYS(#{pdate})
             </if>
         </where>
     </sql>
@@ -47,9 +44,7 @@
         select b.id id, title, content, publish_time, u.id uid , name , avatar from blog.blog_content b left join blog.user u on u.id = b.publisher_id
         <include refid="whereSelect"></include>
         order by publish_time desc
-        <if test="bid == null">
-            limit ${offSet},${limit}
-        </if>
+        limit ${offSet},${limit}
     </select>
 
 
