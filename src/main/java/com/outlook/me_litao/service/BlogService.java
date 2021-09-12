@@ -2,6 +2,7 @@ package com.outlook.me_litao.service;
 
 import com.outlook.me_litao.bean.BaseDataPage;
 import com.outlook.me_litao.bean.DataPage;
+import com.outlook.me_litao.bean.DataPageFactory;
 import com.outlook.me_litao.pojo.Blog;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,7 +21,7 @@ public interface BlogService {
 
     DataPage selectBlogs(Map m);
 
-    <T extends BaseDataPage> void setDataPageType(Class< T > c);
+    void setDataPageType(DataPageFactory dataPageFactory);
 
     int selectBlogsCount(Map m);
 }

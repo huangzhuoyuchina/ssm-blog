@@ -1,9 +1,7 @@
 package com.outlook.me_litao.service;
 
 
-import com.outlook.me_litao.bean.BaseDataPage;
-import com.outlook.me_litao.bean.DataPage;
-import com.outlook.me_litao.bean.UniversalDataPage;
+import com.outlook.me_litao.bean.*;
 import com.outlook.me_litao.dao.BlogMapper;
 import com.outlook.me_litao.pojo.Blog;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -45,11 +43,11 @@ public class BlogServiceImpl implements BlogService{
     public void delBlog(int bid) {
         blogMapper.delBlog(bid);
     }
-    private Class dataPageType = UniversalDataPage.class;
+    private DataPageFactory dataPageFactory = UniversalDataPageFactoryBuilder.build();
 
     @Override
-    public <T extends BaseDataPage> void setDataPageType(Class< T > c){
-        this.dataPageType = c;
+    public void setDataPageType(DataPageFactory dataPageFactory){
+        this.dataPageFactory = dataPageFactory;
     }
 
     @Override
@@ -66,19 +64,7 @@ public class BlogServiceImpl implements BlogService{
         m.put("limit" , 10 );
 
         int count  = blogMapper.selectBlogsCount( m );
-        DataPage page = null;
-        try {
-            Constructor constructor = this.dataPageType.getConstructor();
-            page = ( DataPage) constructor.newInstance();
-        } catch (NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-//        DataPage page = new BlogDataPage();
+        DataPage page = dataPageFactory.createDataPage();
 
         List<Blog> blogs2 = blogMapper.selectBlogs(m);
         List<Map<String,String>> blogs = blogs2.stream().map( blog -> {
