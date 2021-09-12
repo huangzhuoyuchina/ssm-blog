@@ -43,8 +43,8 @@ public class BlogServiceImpl implements BlogService{
     public void delBlog(int bid) {
         blogMapper.delBlog(bid);
     }
-    private DataPageFactory dataPageFactory = UniversalDataPageFactoryBuilder.build();
-    private PackerFactory<Blog> packerFactory = BlogPublicInfoPackerFactoryBuilder.build();
+    private DataPageFactory dataPageFactory = UniversalDataPageFactory.buildFactory();
+    private PackerFactory<Blog> packerFactory = BlogPublicInfoPackerFactory.buildFactory();
 
     @Override
     public void setDataPageType(DataPageFactory dataPageFactory){
@@ -84,7 +84,7 @@ public class BlogServiceImpl implements BlogService{
 
         page.addParameter("publish_time" , (String) m.get("publish_time"));
 
-        packerFactory = BlogPublicInfoPackerFactoryBuilder.build();
+        packerFactory = BlogPublicInfoPackerFactory.buildFactory();
         return page;
     }
 

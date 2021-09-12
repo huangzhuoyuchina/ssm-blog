@@ -13,4 +13,9 @@ public class BlogPublicInfoPackerFactory implements PackerFactory<Blog>{
     public BlogPublicInfo packing(Blog o) {
         return new BlogPublicInfo( o );
     }
+
+    private static PackerFactory<Blog> packerFactory = new BlogPublicInfoPackerFactory();
+    public static PackerFactory<Blog> buildFactory(){
+        return packerFactory;
+    }
 }

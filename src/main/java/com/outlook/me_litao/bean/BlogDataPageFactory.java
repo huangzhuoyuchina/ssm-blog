@@ -11,4 +11,11 @@ public class BlogDataPageFactory implements DataPageFactory{
     public DataPage createDataPage() {
         return new BlogDataPage();
     }
+
+    private static final BlogDataPageFactory blogDataPageFactory = new BlogDataPageFactory();
+
+    public static DataPageFactory buildFactory(){
+        return blogDataPageFactory;
+    }
+
 }

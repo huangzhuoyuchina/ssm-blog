@@ -11,4 +11,10 @@ public class UniversalDataPageFactory implements DataPageFactory{
     public DataPage createDataPage() {
         return new UniversalDataPage();
     }
+    private static final UniversalDataPageFactory universalDataPageFactory = new UniversalDataPageFactory();
+
+    public static DataPageFactory buildFactory(){
+        return universalDataPageFactory;
+    }
+
 }

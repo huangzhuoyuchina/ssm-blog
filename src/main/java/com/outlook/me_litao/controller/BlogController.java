@@ -1,9 +1,6 @@
 package com.outlook.me_litao.controller;
 
-import com.outlook.me_litao.bean.ApiResponse;
-import com.outlook.me_litao.bean.BlogDataPageFactoryBuilder;
-import com.outlook.me_litao.bean.DataPage;
-import com.outlook.me_litao.bean.ResponseCode;
+import com.outlook.me_litao.bean.*;
 import com.outlook.me_litao.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -47,7 +44,7 @@ public class BlogController {
 //        System.out.println( publishTime);
         System.out.println(params);
 
-        blogService.setDataPageType(BlogDataPageFactoryBuilder.build());
+        blogService.setDataPageType(BlogDataPageFactory.buildFactory());
         DataPage blogsPage = blogService.selectBlogs(params);
 //        DataPage blogsPage = blogService.selectBlogs(null);
 
