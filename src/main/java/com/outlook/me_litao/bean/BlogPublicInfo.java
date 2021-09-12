@@ -8,7 +8,7 @@ import com.outlook.me_litao.pojo.Blog;
  * @author: Ximu-Tao
  * @create: 2021-09-12 16:38
  **/
-public class BlogPublicInfo {
+public class BlogPublicInfo implements Packer <Blog>{
     private Blog blog;
     public BlogPublicInfo( Blog blog){
         this.blog = blog;
@@ -40,5 +40,10 @@ public class BlogPublicInfo {
 
     public String getContent(){
         return blog.getContent();
+    }
+
+    @Override
+    public void setObject(Blog o) {
+        this.blog = o;
     }
 }

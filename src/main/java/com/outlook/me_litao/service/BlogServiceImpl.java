@@ -44,10 +44,15 @@ public class BlogServiceImpl implements BlogService{
         blogMapper.delBlog(bid);
     }
     private DataPageFactory dataPageFactory = UniversalDataPageFactoryBuilder.build();
+    private PackerFactory<Blog> packerFactory = BlogPublicInfoPackerFactoryBuilder.build();
 
     @Override
     public void setDataPageType(DataPageFactory dataPageFactory){
         this.dataPageFactory = dataPageFactory;
+    }
+    @Override
+    public void setPackerType( PackerFactory packerFactory ){
+        this.packerFactory = packerFactory;
     }
 
     @Override
@@ -68,8 +73,8 @@ public class BlogServiceImpl implements BlogService{
 
         List<Blog> blogs2 = blogMapper.selectBlogs(m);
 
-        List<BlogPublicInfo> blogs = blogs2.stream()
-                .map(BlogPublicInfo::new)
+        List<Packer> blogs = blogs2.stream()
+                .map(  blog -> packerFactory.packing( blog ))
                 .collect(Collectors.toList());
 
         page.setList( blogs );
@@ -79,7 +84,7 @@ public class BlogServiceImpl implements BlogService{
 
         page.addParameter("publish_time" , (String) m.get("publish_time"));
 
-
+        packerFactory = BlogPublicInfoPackerFactoryBuilder.build();
         return page;
     }
 

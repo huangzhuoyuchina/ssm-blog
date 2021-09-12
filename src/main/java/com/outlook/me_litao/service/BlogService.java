@@ -3,6 +3,7 @@ package com.outlook.me_litao.service;
 import com.outlook.me_litao.bean.BaseDataPage;
 import com.outlook.me_litao.bean.DataPage;
 import com.outlook.me_litao.bean.DataPageFactory;
+import com.outlook.me_litao.bean.PackerFactory;
 import com.outlook.me_litao.pojo.Blog;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,6 +23,7 @@ public interface BlogService {
     DataPage selectBlogs(Map m);
 
     void setDataPageType(DataPageFactory dataPageFactory);
+    void setPackerType(PackerFactory packerFactory);
 
     int selectBlogsCount(Map m);
 }
