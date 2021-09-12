@@ -46,4 +46,18 @@ public class BlogPublicInfo implements Packer <Blog>{
     public void setObject(Blog o) {
         this.blog = o;
     }
+
+    static private class BlogPublicInfoPackerFactory implements PackerFactory<Blog>{
+        @Override
+        public BlogPublicInfo packing(Blog o) {
+            return new BlogPublicInfo( o );
+        }
+
+        }
+
+    private static PackerFactory<Blog> packerFactory = new BlogPublicInfoPackerFactory();
+    public static PackerFactory<Blog> buildFactory(){
+        return packerFactory;
+    }
+
 }

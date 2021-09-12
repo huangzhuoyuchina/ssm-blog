@@ -44,7 +44,7 @@ public class BlogController {
 //        System.out.println( publishTime);
         System.out.println(params);
 
-        blogService.setDataPageType(BlogDataPageFactory.buildFactory());
+        blogService.setDataPageType( BlogDataPage.buildFactory() );
         DataPage blogsPage = blogService.selectBlogs(params);
 //        DataPage blogsPage = blogService.selectBlogs(null);
 

@@ -15,4 +15,17 @@ public class BlogDataPage extends BaseDataPage{
     public List<Blog> getBloglist() {
         return super.list;
     }
+
+    static private class BlogDataPageFactory implements DataPageFactory{
+        @Override
+        public DataPage createDataPage() {
+            return new BlogDataPage();
+        }
+    }
+    private static final BlogDataPageFactory blogDataPageFactory = new BlogDataPageFactory();
+
+    public static DataPageFactory buildFactory(){
+        return blogDataPageFactory;
+    }
+
 }
