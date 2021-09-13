@@ -10,13 +10,13 @@ import com.alibaba.fastjson.JSONObject;
  **/
 public class ApiResponse {
     private ResponseCode code;
-    private DataPage data;
+    private ResponseData data;
 
-    public DataPage getData() {
+    public ResponseData getData() {
         return data;
     }
 
-    public void setData(DataPage data) {
+    public void setData(ResponseData data) {
         this.data = data;
     }
 

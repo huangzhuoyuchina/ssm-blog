@@ -10,7 +10,7 @@ import java.util.Map;
  * @author: Ximu-Tao
  * @create: 2021-09-07 17:57
  **/
-public interface DataPage <T> {
+public interface DataPage <T> extends ResponseData {
 
      String addParameter( String key , String value);
 
