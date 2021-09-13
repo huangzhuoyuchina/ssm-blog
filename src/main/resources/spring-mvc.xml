@@ -29,5 +29,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-
+    <mvc:cors>
+        <mvc:mapping path="/api/**"/>
+    </mvc:cors>
 </beans>
