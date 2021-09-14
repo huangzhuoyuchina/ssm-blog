@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +42,7 @@ public class BlogController {
 //            @RequestParam(name = "publisher_id",required = false) String publisherId,
 //            @RequestParam(name = "publish_time",required = false) String publishTime,
             @RequestParam Map<String,Object> params,
-            Model m ){
+            HttpServletRequest request, HttpServletResponse response ){
 
 //        System.out.println( page);
 //        System.out.println( find);
@@ -52,8 +54,7 @@ public class BlogController {
         DataPage blogsPage = blogService.selectBlogs(params);
 //        DataPage blogsPage = blogService.selectBlogs(null);
 
-        ApiResponse result = new ApiResponse();
-        result.setCode( ResponseCode.OK );
+        ApiResponse result = (ApiResponse) request.getAttribute("apiResponse");
         result.setData( blogsPage );
 
 

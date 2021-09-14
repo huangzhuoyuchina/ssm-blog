@@ -32,4 +32,11 @@
     <mvc:cors>
         <mvc:mapping path="/api/**"/>
     </mvc:cors>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/api/**"/>
+            <bean class="com.outlook.me_litao.filter.ApiResponseFilter" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
