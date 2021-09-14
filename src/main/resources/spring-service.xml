@@ -15,4 +15,8 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
+    <bean class="com.outlook.me_litao.bean.BlogDataPage.BlogDataPageFactory" id="blogDataPageFactory"/>
+    <bean class="com.outlook.me_litao.bean.UniversalDataPage.UniversalDataPageFactory" id="universalDataPageFactory"/>
+
+
 </beans>

@@ -16,7 +16,7 @@ public class BlogDataPage extends BaseDataPage{
         return super.list;
     }
 
-    static private class BlogDataPageFactory implements DataPageFactory{
+    static public class BlogDataPageFactory implements DataPageFactory{
         @Override
         public DataPage createDataPage() {
             return new BlogDataPage();

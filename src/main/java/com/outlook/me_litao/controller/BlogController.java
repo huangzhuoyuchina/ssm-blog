@@ -26,6 +26,10 @@ import java.util.Map;
 public class BlogController {
 
     @Autowired
+    @Qualifier("blogDataPageFactory")
+    private DataPageFactory blogDataPageFactory;
+
+    @Autowired
     @Qualifier("blogServiceImpl")
     private BlogService blogService;
 
@@ -44,7 +48,7 @@ public class BlogController {
 //        System.out.println( publishTime);
         System.out.println(params);
 
-        blogService.setDataPageType( BlogDataPage.buildFactory() );
+        blogService.setDataPageType( blogDataPageFactory );
         DataPage blogsPage = blogService.selectBlogs(params);
 //        DataPage blogsPage = blogService.selectBlogs(null);
 

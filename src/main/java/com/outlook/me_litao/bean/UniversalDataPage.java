@@ -12,7 +12,7 @@ public class UniversalDataPage extends BaseDataPage{
     public List getList() {
         return super.list;
     }
-    private static class UniversalDataPageFactory implements DataPageFactory{
+    public static class UniversalDataPageFactory implements DataPageFactory{
         @Override
         public DataPage createDataPage() {
             return new UniversalDataPage();
