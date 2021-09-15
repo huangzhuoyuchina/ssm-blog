@@ -1,12 +1,14 @@
 package com.outlook.me_litao.controller;
 
 import com.outlook.me_litao.bean.*;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -18,10 +20,10 @@ import java.util.UUID;
  * @author: Ximu-Tao
  * @create: 2021-09-13 18:30
  **/
-@RequestMapping("api")
+
 @RestController
-public class UploadController {
-    @RequestMapping({"upload/avatar.php" , "upload/avatar" })
+public class FileController {
+    @RequestMapping({"api/upload/avatar.php" , "api/upload/avatar" })
     public String uploadAvatar(
             HttpServletRequest request, @RequestParam("avatar") CommonsMultipartFile avatar ){
         ApiResponse result = (ApiResponse) request.getAttribute("apiResponse");
@@ -65,4 +67,30 @@ public class UploadController {
 
         return result.toJSONString();
     }
+
+    @RequestMapping("upload/avatar/{avatarName}" )
+    public void getAvatar(
+            @PathVariable String avatarName,
+            HttpServletRequest request, ServletResponse response
+    ){
+
+        String path = request.getSession().getServletContext().getRealPath("/upload/avatar");
+//        ;
+        File file =  new File( path , avatarName );
+//        System.out.println( file );
+        try (
+                OutputStream os = response.getOutputStream();
+                InputStream bis = new FileInputStream( file );
+        ){
+            byte[] buffer = new byte[1024];
+            int i = bis.read(buffer);
+            while (i != -1) {
+                os.write(buffer, 0, i);
+                i = bis.read(buffer);
+            }
+        } catch (IOException e) {
+        }
+
+    }
+
 }
