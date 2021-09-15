@@ -14,6 +14,9 @@
     <bean id="blogServiceImpl" class="com.outlook.me_litao.service.BlogServiceImpl">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+    <bean id="userService" class="com.outlook.me_litao.service.UserServiceImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
 
     <bean class="com.outlook.me_litao.bean.BlogDataPage.BlogDataPageFactory" id="blogDataPageFactory"/>
     <bean class="com.outlook.me_litao.bean.UniversalDataPage.UniversalDataPageFactory" id="universalDataPageFactory"/>
