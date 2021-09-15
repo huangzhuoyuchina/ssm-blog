@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   <title>Title</title>
+    <style>
+        #div{
+            height: 200px;
+            width: 200px;
+            background-color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+<div id="div">
+<form method="post" action="/api/upload/avatar.php" enctype="multipart/form-data">
+
+    <input type="file" id="signup-avatar" name="avatar" accept="image/jpeg,image/png,image/gif"/>
+    <input type="submit" value="提交">
+</form>
+</div>
+
+
+
+</body>
+</html>

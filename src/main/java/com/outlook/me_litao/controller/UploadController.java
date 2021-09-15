@@ -22,7 +22,7 @@ import java.util.UUID;
 @RestController
 public class UploadController {
     @RequestMapping({"upload/avatar.php" , "upload/avatar" })
-    public String getBlogs(
+    public String uploadAvatar(
             HttpServletRequest request, @RequestParam("avatar") CommonsMultipartFile avatar ){
         ApiResponse result = (ApiResponse) request.getAttribute("apiResponse");
 
