@@ -8,7 +8,7 @@ import com.outlook.me_litao.pojo.Blog;
  * @author: Ximu-Tao
  * @create: 2021-09-12 16:38
  **/
-public class BlogPublicInfo implements Packer <Blog>{
+public class BlogPublicInfo implements Packer <Blog> , ResponseData{
     private Blog blog;
     public BlogPublicInfo( Blog blog){
         this.blog = blog;
