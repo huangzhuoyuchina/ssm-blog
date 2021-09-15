@@ -10,7 +10,13 @@ public enum ResponseCode {
     NOT_LOGGED(405),
     NO_PERMISSION(406),
     MISSING_PARAMETER(407),
-    FILE_LARGE(408);
+    FILE_LARGE(408),
+    FILE_UPLOAD_ERR(409),
+    FILE_TYPE_ERR(410),
+    DATABASE_CONNECT_ERR(501),
+    DATABASE_ERR(502),
+    QUERY_ERR(503),
+    NOT_FIND_DATA(504);
 
     private final int c;
     ResponseCode( int code){
@@ -21,10 +27,3 @@ public enum ResponseCode {
         return c;
     }
 }
-
-//| 409 | 文件上传错误         |
-//| 410 | 文件类型错误         |
-//| 501 | 无法连接数据库 |
-//| 502 | 无法修改数据库 |
-//| 503 | 查询到了多于1个用户 |
-//| 504 | 找不到目标数据 |
