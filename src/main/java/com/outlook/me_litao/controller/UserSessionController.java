@@ -7,6 +7,7 @@ import com.outlook.me_litao.bean.UserPublicInfo;
 import com.outlook.me_litao.pojo.User;
 import com.outlook.me_litao.service.BlogService;
 import com.outlook.me_litao.service.UserService;
+import com.outlook.me_litao.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -39,8 +40,7 @@ public class UserSessionController {
     public String login( @RequestParam("uname") String uname,
                          @RequestParam("upw") String upw,
                          HttpServletRequest request ){
-//      TODO :   正则表达式测试用户名
-//        TODO : 检查密码是否已被加密
+
         ApiResponse result = (ApiResponse) request.getAttribute("apiResponse");
         User user = new User();
         user.setPw( upw );
@@ -92,5 +92,39 @@ public class UserSessionController {
         return result.toJSONString();
 
     }
+
+    @RequestMapping({"signup.php" , "signup" })
+    public String signup(@RequestParam("uname") String uname,
+                         @RequestParam("upw") String upw,
+                         @RequestParam("avatar") String avatar,
+                         HttpServletRequest request){
+
+        ApiResponse result = (ApiResponse) request.getAttribute("apiResponse");
+        User user = new User();
+
+        if ( !UserUtil.checkName( uname )){
+            result.setCode( ResponseCode.USERNAME_ERROR );
+            return result.toJSONString();
+        }
+
+        if ( !UserUtil.checkPw( upw ) ){
+            result.setCode( ResponseCode.PW_NOT_SHA1 );
+            return result.toJSONString();
+        }
+
+        user.setPw( upw );
+        user.setName( uname );
+        user.setAvatar( avatar );
+
+        userService.addUser( user );
+
+        List<User> users = userService.selectUser(user);
+
+        request.getSession().setAttribute( "user" , users.get(0) );
+
+        return result.toJSONString();
+
+    }
+
 
 }
